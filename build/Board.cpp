@@ -82,4 +82,11 @@ void Board::search_recur(Board::direction& dir, int start_row, int start_col, co
 	}
 
 }
+
+void Board::replace(Board::direction dir, int start_row, int start_col, const Tile& main, const Tile& target) {
+	if (get(start_row, start_col) == target) {
+		set(start_row, start_col, main);
+		replace(dir, start_row + dir.row, start_col + dir.col, main, target);
+	}
+}
 }
