@@ -18,7 +18,7 @@ class Player {
 		virtual int num_pieces() const = 0;
 		
 		virtual Tile color() const = 0;
-}
+};
 }
 
 #endif //PLAYER_H_
