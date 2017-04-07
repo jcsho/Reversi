@@ -33,7 +33,7 @@ class Computer_player : public Player {
 		
 		virtual Tile color() const;
 		
-}
+};
 }
 
 #endif //COMPUTER_PLAYER_H_
