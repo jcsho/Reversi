@@ -4,6 +4,8 @@
 #define BOARD_H_
 
 #include "Tile.h"
+#include "Computer_player.h"
+#include "Human_player.h"
 #include <vector>
 
 namespace reversi {
@@ -15,16 +17,15 @@ class Board {
 	public:
 		Board(int size); //constructor
 
-		//~Board(); //destructor
+		~Board() { } //destructor
 
 		struct direction {
 			int row;
 			int col;
 			int valid;
 			int score;
-		}; //dir
-
-		std::vector<direction> test;
+			int temp_score;
+		}; //direction
 
 		int size() const; //length of board
 
@@ -36,11 +37,13 @@ class Board {
 
 		void print() const; //prints board to terminal
 
-		std::vector<direction> search_base(int row, int col, const Tile& t); //searches the adjacent 8 spaces around (row, col)
+		std::vector<direction> search_base(int row, int col, const Tile& target); //searches the adjacent 8 spaces around (row, col)
 
-		void search_recur(direction& dir, int start_row, int start_col, const Tile& t); //searchs for t
+		void search_recur(direction& dir, int start_row, int start_col, const Tile& target); //searchs for t
 
-		void replace(direction dir, int start_row, int start_col, const Tile& t); //replace all tiles in 1 direction with t
+		void replace(direction dir, int start_row, int start_col, const Tile& main, const Tile& target); //replace all tiles in 1 direction with main
+
+		bool check_avail_move(Player p); //check to see if player can make a valid move
 
 }; //Board
 
