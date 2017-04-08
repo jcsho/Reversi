@@ -7,6 +7,6 @@ enum class Tile : char {
 	black = 'b',
 	white = 'w',
 	none = 'o',
-};
+}; //Tile
 
 #endif //TILE_H_

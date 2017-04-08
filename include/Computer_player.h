@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Board.h"
 #include "Tile.h"
+#include "Direction.h"
 
 namespace reversi {
 
@@ -15,25 +16,24 @@ class Computer_player : public Player {
 	private:
 		int pieces;
 		int score;
-		Tile color;
+		Tile cp_color;
 		bool can_move;
 
-		std::vector<Board::direction> avail_move;
+		Direction dir;
+		std::vector<Direction> avail_move;
 
 	public:
 		Computer_player(const Tile& t);
 
-		~Computer_player() { }
+		void move(Board& b, const Tile& target);
 
-		void move(Board& b, Human_player p);
+		int current_score() const override;
 
-		virtual int current_score() const;
+		int num_pieces() const override;
 
-		virtual int num_pieces() const;
+		Tile color() const override;
 		
-		virtual Tile color() const;
-		
-};
-}
+}; //Computer_player
+} //reversi
 
 #endif //COMPUTER_PLAYER_H_

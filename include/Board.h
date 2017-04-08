@@ -4,8 +4,7 @@
 #define BOARD_H_
 
 #include "Tile.h"
-#include "Computer_player.h"
-#include "Human_player.h"
+#include "Direction.h"
 #include <vector>
 
 namespace reversi {
@@ -13,19 +12,12 @@ namespace reversi {
 class Board {
 	private:
 		std::vector<std::vector<Tile>> board; //stores the reversi game board
+		Direction dir;		
 
 	public:
 		Board(int size); //constructor
 
 		~Board() { } //destructor
-
-		struct direction {
-			int row;
-			int col;
-			int valid;
-			int score;
-			int temp_score;
-		}; //direction
 
 		int size() const; //length of board
 
@@ -37,13 +29,13 @@ class Board {
 
 		void print() const; //prints board to terminal
 
-		std::vector<direction> search_base(int row, int col, const Tile& target); //searches the adjacent 8 spaces around (row, col)
+		std::vector<Direction> search_base(int row, int col, const Tile& target); //searches the adjacent 8 spaces around (row, col)
 
-		void search_recur(direction& dir, int start_row, int start_col, const Tile& target); //searchs for t
+		void search_recur(Direction& dir, int start_row, int start_col, const Tile& target); //searchs for t
 
-		void replace(direction dir, int start_row, int start_col, const Tile& main, const Tile& target); //replace all tiles in 1 direction with main
+		void replace(Direction dir, int start_row, int start_col, const Tile& main, const Tile& target); //replace all tiles in 1 direction with main
 
-		bool check_avail_move(Player p); //check to see if player can make a valid move
+		//bool check_avail_move(const Tile& target); //check to see if player can make a valid move
 
 }; //Board
 
