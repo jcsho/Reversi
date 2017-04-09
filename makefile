@@ -4,6 +4,9 @@ DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 
+vpath %.h include
+vpath %.cpp src
+
 reversi : $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o reversi
 
