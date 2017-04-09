@@ -4,6 +4,7 @@
 #define PLAYER_H_
 
 #include "Tile.h"
+#include "Board.h"
 
 namespace reversi {
 
@@ -12,11 +13,10 @@ class Player {
 
 		virtual ~Player() { }
 
-		virtual int current_score() const = 0;
-
-		virtual int num_pieces() const = 0;
+		virtual int score(Board b) const = 0;
 		
 		virtual Tile color() const = 0;
 }; //Player
+}
 
 #endif //PLAYER_H_

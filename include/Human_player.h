@@ -14,25 +14,24 @@ namespace reversi {
 
 class Human_player : public Player {
 	private:
-		int pieces;
-		int score;
 		Tile p_color;
+		bool moved;
 
 		Direction dir;
 		std::vector<Direction> avail_move;
 
 	public:
-		Human_player(const Tile& t);
+		Human_player(const Tile& t); //makes human player of color t
 
-		void invalid_move();
+		void invalid_move(); //prints out invalid move
 
-		void move(Board& b, int row, int col, const Tile& target);
+		void move(Board& b, int row, int col, const Tile& target); //makes a move from user input
 
-		int current_score() const override;
+		int score(Board b) const override;
 
-		int num_pieces() const override;
+		Tile color() const override; //returns tile color of player
 
-		Tile color() const override;
+		bool turn_taken() const; //checks if player made a valid turn
 }; //Human_player
 } //reversi
 

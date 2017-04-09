@@ -14,8 +14,6 @@ namespace reversi {
 
 class Computer_player : public Player {
 	private:
-		int pieces;
-		int score;
 		Tile cp_color;
 		bool can_move;
 
@@ -23,15 +21,13 @@ class Computer_player : public Player {
 		std::vector<Direction> avail_move;
 
 	public:
-		Computer_player(const Tile& t);
+		Computer_player(const Tile& t); //makes computer of tile color t
 
-		void move(Board& b, const Tile& target);
+		void move(Board& b, const Tile& target); //makes move at position which takes the most pieces
 
-		int current_score() const override;
+		int score(Board b) const override;
 
-		int num_pieces() const override;
-
-		Tile color() const override;
+		Tile color() const override; //returns computer tile color
 		
 }; //Computer_player
 } //reversi

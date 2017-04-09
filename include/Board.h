@@ -33,9 +33,11 @@ class Board {
 
 		void search_recur(Direction& dir, int start_row, int start_col, const Tile& target); //searchs for t
 
-		void replace(Direction dir, int start_row, int start_col, const Tile& main, const Tile& target); //replace all tiles in 1 direction with main
+		void replace(Direction& dir, int start_row, int start_col, const Tile& main, const Tile& target); //replace all tiles in 1 direction with main
 
-		//bool check_avail_move(const Tile& target); //check to see if player can make a valid move
+		int score(const Tile& color) const;
+
+		bool check_avail_move(const Tile& main, const Tile& target); //check to see if player can make a valid move
 
 }; //Board
 
