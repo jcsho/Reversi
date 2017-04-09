@@ -10,8 +10,6 @@
 namespace reversi {
 
 Computer_player::Computer_player(const Tile& t) {
-	pieces = 32;
-	score = 0;
 	cp_color = t;
 	can_move = true;
 }
@@ -31,10 +29,10 @@ void Computer_player::move(Board& b, const Tile& target) {
 
 			if (b.get(i, j) == Tile::none) {
 				avail_move = b.search_base(i, j, target);
-				
+
 				if (avail_move.size() > 0) {
 					for (Direction& dir : avail_move) {
-						b.search_recur(dir, i + dir.row, j + dir.col, target);
+						b.search_recur(dir, i + dir.row, j + dir.col, cp_color);
 						total_score += dir.temp_score;
 					}
 
@@ -43,6 +41,7 @@ void Computer_player::move(Board& b, const Tile& target) {
 						best_move = avail_move;
 						move_row = i;
 						move_col = j;
+						std::cout << "searched recur " << move_row << " " << move_col << "\n";
 					}
 				}
 			}
@@ -50,28 +49,23 @@ void Computer_player::move(Board& b, const Tile& target) {
 	}
 
 	if (move_row > -1 && move_col > -1) {
-		for (const Direction dir : best_move) {
+		for (Direction& dir : best_move) {
+			std::cout << dir.valid << "\n";
 			if (dir.valid == 0) {
 				b.set(move_row, move_col, cp_color);
-				b.replace(dir, move_row + dir.row, move_col + dir.col, cp_color, target);
-				score += dir.score;
-				pieces -= dir.score;			
+				b.replace(dir, move_row + dir.row, move_col + dir.col, cp_color, target);	
+				std::cout << "Computer moved\n";
 			}
 		}
 	} else {
 		can_move = false;
 	}
 
-
 	avail_move.clear();
 }
 
-int Computer_player::current_score() const {
-	return score;
-}
-
-int Computer_player::num_pieces() const {
-	return pieces;
+int Computer_player::score(Board b) const {
+	return b.score(cp_color);
 }
 
 Tile Computer_player::color() const {

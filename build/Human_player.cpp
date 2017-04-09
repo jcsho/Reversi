@@ -10,16 +10,16 @@
 namespace reversi {
 
 Human_player::Human_player(const Tile& t) {
-	pieces = 32;
-	score = 0;
 	p_color = t;
-}
+	moved = false;
+} 
 
 void Human_player::invalid_move() {
 	std::cout << "Invalid move. Try again.\n";
 }
 
 void Human_player::move(Board& b, int row, int col, const Tile& target) {
+	moved = false;
 
 	int score_amt = 0;
 
@@ -27,21 +27,21 @@ void Human_player::move(Board& b, int row, int col, const Tile& target) {
 
 	if (avail_move.size() > 0) {
 		for (Direction& dir : avail_move) {
-			b.search_recur(dir, row + dir.row, col + dir.col, target);
+			b.search_recur(dir, row + dir.row, col + dir.col, p_color);
 			score_amt += dir.temp_score;
 		}
-	} else {
-		invalid_move();
-	}
 
-	if (score_amt > 0) {
-		for (const Direction dir : avail_move) {
-			if (dir.valid == 0) {
-				b.set(row, col, p_color);
-				b.replace(dir, row + dir.row, col + dir.col, p_color, target);
-				score += dir.score;
-				pieces -= dir.score;
+		if (score_amt > 0) {
+			for (Direction& dir : avail_move) {
+				if (dir.valid == 0) {
+					b.set(row, col, p_color);
+					b.replace(dir, row + dir.row, col + dir.col, p_color, target);
+					moved = true;
+					std::cout << "Human moved\n";
+				}
 			}
+		} else {
+			invalid_move();
 		}
 	} else {
 		invalid_move();
@@ -49,15 +49,15 @@ void Human_player::move(Board& b, int row, int col, const Tile& target) {
 		
 }
 
-int Human_player::current_score() const {
-	return score;
-}
-
-int Human_player::num_pieces() const {
-	return pieces;
+int Human_player::score(Board b) const {
+	return b.score(p_color);
 }
 
 Tile Human_player::color() const {
 	return p_color;
+}
+
+bool Human_player::turn_taken() const {
+	return moved;
 }
 } //reversi
