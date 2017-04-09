@@ -19,5 +19,7 @@ Human_player.o : Player.h Tile.h Human_player.h Human_player.cpp
 Computer_player.o : Player.h Tile.h Computer_player.h Computer_player.cpp
 	$(CC) $(CFLAGS) Computer_player.cpp
 
+.PHONY : clean
+
 clean:
 	\rm *.o *~ reversi
