@@ -4,7 +4,7 @@
 
 ### Criteria:
 
-  - It allows a human to play against the computer. You do not need to allow for human vs. human or computer vs. computer games.
+  - It allows a human to play against the computer.
 
   - It starts a game using the “Othello” board configuration, i.e. four pieces in the center alternating white and black. See the “starting position” picture on the Reversi page.
 
