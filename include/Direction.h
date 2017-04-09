@@ -1,4 +1,4 @@
-//Direction.cpp
+//Direction.h
 
 #ifndef DIRECTION_H_
 #define DIRECTION_H_
